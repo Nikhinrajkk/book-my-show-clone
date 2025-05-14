@@ -7,6 +7,7 @@ import {
   HoverCardTrigger,
   HoverCardContent
 } from '@/components/ui/hover-card';
+import { Link } from 'react-router-dom';
 
 interface ShowTime {
   time: string;
@@ -82,10 +83,12 @@ const ShowTimeWithTooltip: React.FC<{ show: ShowTime }> = ({ show }) => {
   return (
     <HoverCard>
       <HoverCardTrigger asChild>
-        <div className="border border-[#cccccc] rounded-md text-center flex-col justify-center items-center flex-wrap cursor-pointer w-[105px] h-[40px] px-[10px] py-[5px] hover:border-bms-green text-bms-green">
-          <div className="text-xs">{show.time}</div>
-          {show.format && <div className="text-[8px] text-gray-500">{show.format}</div>}
-        </div>
+        <Link to="/seat-layout">
+          <div className="border border-[#cccccc] rounded-md text-center flex-col justify-center items-center flex-wrap cursor-pointer w-[105px] h-[40px] px-[10px] py-[5px] hover:border-bms-green text-bms-green">
+            <div className="text-xs">{show.time}</div>
+            {show.format && <div className="text-[8px] text-gray-500">{show.format}</div>}
+          </div>
+        </Link>
       </HoverCardTrigger>
       <HoverCardContent className="w-auto p-0 shadow-lg rounded-lg overflow-hidden border-0">
         <div className="bg-white">

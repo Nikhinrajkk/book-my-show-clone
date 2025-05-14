@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import MovieDetailsPage from "./pages/MovieDetailsPage";
 import MovieHomePage from "./pages/HomeScreen";
+import SeatLayout from "./pages/SeatLayout";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
           <Route path="/movie/:id" element={<MovieDetailsPage />} />
           <Route path='/select-theater' element={<Index />} />
+          <Route path='/seat-layout' element={<SeatLayout />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
