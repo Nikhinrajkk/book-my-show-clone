@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 const Navbar = () => {
   return (
     <div className="w-full border-b border-gray-200">
-      <div className="container mx-auto py-3 px-4 flex justify-between items-center">
+      <div className="container mx-auto py-3 px-4 flex justify-between items-center max-w-[80%]">
         {/* Logo */}
         <div className="flex items-center">
           <div className="text-xl font-bold flex items-center">
