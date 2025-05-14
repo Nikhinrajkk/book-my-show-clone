@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Heart, Info } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
@@ -83,7 +82,7 @@ const ShowTimeWithTooltip: React.FC<{ show: ShowTime }> = ({ show }) => {
   return (
     <HoverCard>
       <HoverCardTrigger asChild>
-        <Link to="/seat-layout">
+        <Link to="/select-showtime">
           <div className="border border-[#cccccc] rounded-md text-center flex-col justify-center items-center flex-wrap cursor-pointer w-[105px] h-[40px] px-[10px] py-[5px] hover:border-bms-green text-bms-green">
             <div className="text-xs">{show.time}</div>
             {show.format && <div className="text-[8px] text-gray-500">{show.format}</div>}
