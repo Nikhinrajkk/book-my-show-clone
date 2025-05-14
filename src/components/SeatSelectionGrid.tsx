@@ -11,8 +11,20 @@ interface SeatData {
   status: SeatStatus;
 }
 
-const SeatSelectionGrid: React.FC = () => {
+interface SeatSelectionGridProps {
+  selectedSeats: SeatData[];
+  maxSeats: number;
+  onSeatClick: (seat: SeatData) => void;
+}
+
+const SeatSelectionGrid: React.FC<SeatSelectionGridProps> = ({
+  onSeatClick,
+  selectedSeats,
+  maxSeats
+}) => {
   const [seats, setSeats] = useState<Record<string, SeatData[]>>(generateSeats());
+
+  console.log('seats', seats);
   
   // Generate seat data based on the provided HTML structure and image
   function generateSeats(): Record<string, SeatData[]> {
@@ -61,6 +73,8 @@ const SeatSelectionGrid: React.FC = () => {
   }
 
   const handleSeatClick = (seat: SeatData) => {
+    if (selectedSeats.length === maxSeats)  return;
+
     if (seat.status === 'sold') return;
     
     const newSeats = { ...seats };
@@ -74,6 +88,7 @@ const SeatSelectionGrid: React.FC = () => {
     
     newSeats[seat.row] = rowSeats;
     setSeats(newSeats);
+    onSeatClick(seat);
   };
   
   const renderSeat = (seat: SeatData) => {
