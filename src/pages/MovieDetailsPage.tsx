@@ -1,6 +1,5 @@
-
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ChevronRight, Star, Share } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -122,6 +121,7 @@ const reviewTags: ReviewTag[] = [
 ];
 
 const MovieDetailPage = () => {
+  const navigate = useNavigate();
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
       {/* Header */}
@@ -255,7 +255,7 @@ const MovieDetailPage = () => {
               </div>
               
               {/* Book Tickets Button */}
-              <Button className="bg-[#F84464] hover:bg-[#F84464]/90 text-white px-10 py-6 text-lg rounded-md">
+              <Button className="bg-[#F84464] hover:bg-[#F84464]/90 text-white px-10 py-6 text-lg rounded-md" onClick={() => navigate('/select-theater')}>
                 Book tickets
               </Button>
             </div>
