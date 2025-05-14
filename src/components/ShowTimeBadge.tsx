@@ -3,24 +3,35 @@ import React from 'react';
 
 interface ShowTimeBadgeProps {
   time: string;
-  format: string;
+  format?: string;
   isSelected: boolean;
-  onClick?: () => void;
+  onClick: () => void;
+  className?: string;
 }
 
-const ShowTimeBadge: React.FC<ShowTimeBadgeProps> = ({ time, format, isSelected, onClick }) => {
+const ShowTimeBadge: React.FC<ShowTimeBadgeProps> = ({ 
+  time, 
+  format, 
+  isSelected, 
+  onClick, 
+  className = ''
+}) => {
   return (
-    <div 
+    <button 
       onClick={onClick}
-      className={`rounded-md px-4 py-2 text-center min-w-[96px] h-[38px] flex flex-col justify-center items-center cursor-pointer transition-colors ${
-        isSelected 
-          ? 'bg-[#e8a900] text-white' 
-          : 'bg-white text-[#e8a900] border border-[#e8a900]'
-      }`}
+      className={`
+        flex flex-col justify-center items-center
+        min-w-[96px] h-[38px] px-2 py-1 rounded
+        ${isSelected 
+          ? 'bg-amber-500 text-white' 
+          : 'bg-white border border-amber-500 text-amber-500'}
+        hover:opacity-90
+        ${className}
+      `}
     >
-      <div className="text-[10px]">{time}</div>
-      <div className="text-[10px]">{format}</div>
-    </div>
+      <span className="text-sm font-medium">{time}</span>
+      {format && <span className="text-[10px]">{format}</span>}
+    </button>
   );
 };
 

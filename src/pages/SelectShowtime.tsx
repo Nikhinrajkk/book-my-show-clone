@@ -4,6 +4,7 @@ import { ArrowLeft } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import ShowTimeBadge from '@/components/ShowTimeBadge';
+import SeatQuantityDialog from '@/components/SeatQuantityDialog';
 
 // Sample movie data - in a real app, this would come from props or context
 const movieData = {
@@ -20,6 +21,7 @@ const movieData = {
 
 const SelectShowtime: React.FC = () => {
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  const [showSeatDialog, setShowSeatDialog] = useState(false);
   const navigate = useNavigate();
   
   const handleTimeSelection = (time: string) => {
@@ -28,7 +30,7 @@ const SelectShowtime: React.FC = () => {
   
   const handleContinue = () => {
     if (selectedTime) {
-      navigate('/seat-layout');
+      setShowSeatDialog(true);
     }
   };
   
@@ -103,6 +105,12 @@ const SelectShowtime: React.FC = () => {
           </Button>
         </div>
       </div>
+
+      {/* Seat Quantity Dialog */}
+      <SeatQuantityDialog 
+        isOpen={showSeatDialog}
+        onClose={() => setShowSeatDialog(false)}
+      />
     </div>
   );
 };
