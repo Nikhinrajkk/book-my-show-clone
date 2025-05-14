@@ -1,12 +1,19 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { ArrowLeft, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
 import ShowTimeBadge from '@/components/ShowTimeBadge';
 import SeatSelectionGrid from '@/components/SeatSelectionGrid';
 import SeatLegend from '@/components/SeatLegend';
 
 const SeatLayout = () => {
+  const [selectedTime, setSelectedTime] = useState("06:45 PM");
+  
+  const handleTimeSelection = (time: string) => {
+    setSelectedTime(time);
+  };
+  
   return (
     <div className="flex flex-col min-h-screen bg-white">
       {/* Header */}
@@ -17,7 +24,7 @@ const SeatLayout = () => {
           </Link>
           <div>
             <h1 className="font-semibold text-lg">Prince and Family</h1>
-            <p className="text-xs text-gray-500">Vanitha Cineplex RGB Laser 4K 3D ATMOS: Edappally | Wednesday,May 14, 2025, 06:45 PM</p>
+            <p className="text-xs text-gray-500">Vanitha Cineplex RGB Laser 4K 3D ATMOS: Edappally | Wednesday, May 14, 2025, 06:45 PM</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -34,22 +41,19 @@ const SeatLayout = () => {
           <ShowTimeBadge 
             time="06:45 PM" 
             format="4K LASER ATMOS" 
-            isSelected={true} 
+            isSelected={selectedTime === "06:45 PM"} 
+            onClick={() => handleTimeSelection("06:45 PM")}
           />
           <ShowTimeBadge 
             time="10:00 PM" 
             format="4K LASER ATMOS" 
-            isSelected={false} 
+            isSelected={selectedTime === "10:00 PM"} 
+            onClick={() => handleTimeSelection("10:00 PM")}
           />
         </div>
 
         {/* Main content */}
         <div className="w-full max-w-3xl space-y-4 mb-8">
-          {/* Screen prices */}
-          <div className="text-center py-2 border-b border-gray-200">
-            <div className="text-sm text-gray-600">Rs. 260 SCREEN1 SOFA</div>
-          </div>
-
           {/* Seat grid */}
           <SeatSelectionGrid />
 
@@ -63,6 +67,13 @@ const SeatLayout = () => {
 
           {/* Seat legend */}
           <SeatLegend />
+        </div>
+      </div>
+      
+      {/* Proceed button */}
+      <div className="sticky bottom-0 bg-white border-t border-gray-200 p-4">
+        <div className="max-w-3xl mx-auto">
+          <Button className="w-full bg-red-500 hover:bg-red-600">Proceed</Button>
         </div>
       </div>
     </div>
