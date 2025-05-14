@@ -64,7 +64,7 @@ const TheatersList: React.FC<TheaterListProps> = ({ theaters }) => {
       </div>
 
       {/* Theater List */}
-      <div className="space-y-6">
+      <div className="space-y-6 bg-white">
         {theaters.map((theater) => (
           <TheaterItem key={theater.id} theater={theater} />
         ))}
@@ -75,7 +75,7 @@ const TheatersList: React.FC<TheaterListProps> = ({ theaters }) => {
 
 const TheaterItem: React.FC<{ theater: Theater }> = ({ theater }) => {
   return (
-    <div className="border-t border-gray-200 py-4">
+    <div className="border-b border-gray-200 p-4">
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-2">
           <Heart className="text-gray-400 hover:text-bms-red cursor-pointer" size={18} />
