@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar';
 import DateSelector from '@/components/DateSelector';
 import MovieHeader from '@/components/MovieHeader';
 import TheatersList from '@/components/TheatersList';
+import Footer from '@/components/Footer';
 
 const Index = () => {
   // Mock data for theaters
@@ -83,6 +84,8 @@ const Index = () => {
       <DateSelector />
       
       <TheatersList theaters={theaters} />
+
+      <Footer />
     </div>
   );
 };
