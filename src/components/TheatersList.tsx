@@ -43,24 +43,6 @@ const TheatersList: React.FC<TheaterListProps> = ({ theaters }) => {
             <span className="text-sm text-gray-600">SUBTITLES LANGUAGE</span>
           </div>
         </div>
-
-        <div className="flex items-center gap-4">
-          <div className="border rounded-md p-2 flex gap-2">
-            <button className="text-sm">English - 2D</button>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
-          </div>
-          <div className="border rounded-md p-2 flex gap-2">
-            <button className="text-sm">Price Range</button>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
-          </div>
-          <div className="border rounded-md p-2 flex gap-2">
-            <button className="text-sm">Preferred Time</button>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
-          </div>
-          <div className="border rounded-md p-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-search"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          </div>
-        </div>
       </div>
 
       {/* Theater List */}
