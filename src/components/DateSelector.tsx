@@ -1,5 +1,7 @@
+
 import React, { useState } from 'react';
 import FilterOptions from './FilterOptions';
+import { CircleDot, Languages } from 'lucide-react';
 
 interface DateProps {
   day: string;
@@ -39,6 +41,32 @@ const DateSelector = () => {
   
   return (
     <div className="w-full bg-white border-b border-gray-200 py-2 shadow-[0px_2px_4px_0.5px_rgba(0,0,0,0.2)]">
+      {/* Subtitle language indicator */}
+      <div className="container mx-auto px-4 max-w-[80%] border-b pb-2 mb-2 flex items-center text-xs text-gray-600">
+        <div className="flex items-center mr-6">
+          <span className="inline-flex items-center justify-center bg-green-100 text-green-800 text-[10px] font-medium px-1 py-0.5 rounded mr-1">LAN</span>
+          <span>indicates subtitle language, if subtitles are available</span>
+          <span className="ml-1 text-bms-red font-medium">Got it</span>
+        </div>
+        
+        <div className="flex-1"></div>
+        
+        <div className="flex items-center space-x-4">
+          <div className="flex items-center">
+            <CircleDot className="w-4 h-4 text-green-500 mr-1" />
+            <span>AVAILABLE</span>
+          </div>
+          <div className="flex items-center">
+            <CircleDot className="w-4 h-4 text-yellow-500 mr-1" />
+            <span>FAST FILLING</span>
+          </div>
+          <div className="flex items-center">
+            <span className="inline-flex items-center justify-center bg-blue-100 text-blue-800 text-[10px] font-medium px-1 py-0.5 rounded mr-1">LAN</span>
+            <span>SUBTITLES LANGUAGE</span>
+          </div>
+        </div>
+      </div>
+
       <div className="container mx-auto px-4 max-w-[80%] flex justify-between">
         <div className="flex overflow-x-auto gap-2 no-scrollbar py-2">
           {dateItems.map((item) => (
@@ -54,7 +82,6 @@ const DateSelector = () => {
         </div>
 
         <FilterOptions />
-
       </div>
     </div>
   );
