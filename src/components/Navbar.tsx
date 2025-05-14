@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 const Navbar = () => {
   return (
     <div className="w-full border-b border-gray-200">
-      <div className="container mx-auto py-3 px-4 flex justify-between items-center">
+      <div className="container mx-auto py-3 px-4 flex justify-between items-center max-w-[80%]">
         {/* Logo */}
         <div className="flex items-center">
           <div className="text-xl font-bold flex items-center">
@@ -46,7 +46,7 @@ const Navbar = () => {
       
       {/* Navigation Links */}
       <div className="bg-white border-b border-gray-200">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 max-w-[80%]">
           <nav className="flex overflow-x-auto no-scrollbar">
             <NavItem label="Movies" active />
             <NavItem label="Stream" />

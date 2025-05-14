@@ -5,6 +5,7 @@ import DateSelector from '@/components/DateSelector';
 import MovieHeader from '@/components/MovieHeader';
 import TheatersList from '@/components/TheatersList';
 import Footer from '@/components/Footer';
+import FilterOptions from '@/components/FilterOptions';
 
 const Index = () => {
   // Mock data for theaters
@@ -72,7 +73,7 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#F5F5F5]">
       <Navbar />
       
       <MovieHeader 
@@ -82,6 +83,7 @@ const Index = () => {
       />
       
       <DateSelector />
+      <FilterOptions />
       
       <TheatersList theaters={theaters} />
 
