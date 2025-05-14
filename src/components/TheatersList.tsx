@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Heart, Info } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
@@ -130,22 +129,29 @@ const ShowTimeWithTooltip: React.FC<{ show: ShowTime }> = ({ show }) => {
           {show.format && <div className="text-xs text-gray-500">{show.format}</div>}
         </div>
       </HoverCardTrigger>
-      <HoverCardContent className="w-auto p-3">
-        <div className="space-y-2">
-          <h4 className="text-sm font-medium">Ticket Information</h4>
-          <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs">
-            <div className="text-gray-500">RECLINER:</div>
-            <div>₹ 600.00</div>
-            <div className="text-gray-500">ELITE:</div>
-            <div>₹ 330.00</div>
-            <div className="text-gray-500">PRIME:</div>
-            <div>₹ 270.00</div>
-            <div className="text-gray-500">CLASSIC:</div>
-            <div>₹ 210.00</div>
-          </div>
-          <div className="pt-1 text-xs text-gray-500 border-t">
-            <p>Internet handling fees apply</p>
-            <p>Available seats may vary</p>
+      <HoverCardContent className="w-auto p-0 shadow-lg rounded-lg overflow-hidden border-0">
+        <div className="bg-white">
+          <div className="grid grid-cols-4 text-center">
+            <div className="p-2 flex flex-col">
+              <span className="font-bold">₹ 700.00</span>
+              <span className="text-xs font-medium">RECLINER</span>
+              <span className="text-xs text-amber-500">Almost Full</span>
+            </div>
+            <div className="p-2 flex flex-col">
+              <span className="font-bold">₹ 330.00</span>
+              <span className="text-xs font-medium">ELITE</span>
+              <span className="text-xs text-amber-500">Almost Full</span>
+            </div>
+            <div className="p-2 flex flex-col">
+              <span className="font-bold">₹ 280.00</span>
+              <span className="text-xs font-medium">PRIME</span>
+              <span className="text-xs text-bms-green">Available</span>
+            </div>
+            <div className="p-2 flex flex-col">
+              <span className="font-bold">₹ 210.00</span>
+              <span className="text-xs font-medium">CLASSIC</span>
+              <span className="text-xs text-bms-green">Available</span>
+            </div>
           </div>
         </div>
       </HoverCardContent>
