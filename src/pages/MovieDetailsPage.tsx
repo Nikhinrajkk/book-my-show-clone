@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { ChevronRight, Star, Share } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -7,6 +7,8 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext } from "@/components/ui/carousel";
+import { LoginDialog } from "@/components/login";
+import { getMovies } from "@/api";
 
 // Cast Member Interface
 interface CastMember {
@@ -122,8 +124,36 @@ const reviewTags: ReviewTag[] = [
 
 const MovieDetailPage = () => {
   const navigate = useNavigate();
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+
+  const [movie, setMovie] = useState<any>(null);
+  const { id } = useParams();
+
+
+  useEffect(() => {
+    const fetchMovie = async () => {
+      try {
+        const response = await getMovies()
+        // const movieResp = response.data.find((mov: any) => mov.id === id);
+        console.log(id);
+        console.log(response);
+        const movieResp = response[1];
+        setMovie(movieResp);
+      } catch (error) {
+        console.error('Error fetching movie:', error);
+      }
+    };
+    fetchMovie();
+  }, []);
+
+  useEffect(() => {
+    console.log(movie);
+  }, [movie]);
+
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
+      <LoginDialog open={isLoginOpen} onOpenChange={setIsLoginOpen} />
+      
       {/* Header */}
       <header className="bg-white shadow-sm sticky top-0 z-10">
         <div className="container mx-auto px-4">
@@ -149,7 +179,12 @@ const MovieDetailPage = () => {
                 <span className="mr-2">Kochi</span>
                 <ChevronRight className="h-4 w-4" />
               </div>
-              <Button className="bg-red-500 hover:bg-red-600">Sign in</Button>
+              <Button 
+                className="bg-red-500 hover:bg-red-600"
+                onClick={() => setIsLoginOpen(true)}
+              >
+                Sign in
+              </Button>
             </div>
           </div>
         </div>
@@ -192,7 +227,7 @@ const MovieDetailPage = () => {
             <div className="w-full md:w-80 flex-shrink-0 mb-6 md:mb-0">
               <div className="relative rounded-lg overflow-hidden shadow-lg border-2 border-gray-800">
                 <img 
-                  src="https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/thudarum-et00442565-1745136818.jpg" 
+                  src="https://jdswukniiyawdpfkpvjn.supabase.co/storage/v1/object/public/vibe-bucket/movies/thudarum.png" 
                   alt="Thudarum" 
                   className="w-full h-[350px] object-cover"
                 />
@@ -209,7 +244,7 @@ const MovieDetailPage = () => {
             {/* Movie Details */}
             <div className="md:pl-8 flex-grow text-white">
               <div className="flex items-center justify-between mb-4">
-                <h1 className="text-4xl font-bold">Thudarum</h1>
+                <h1 className="text-4xl font-bold">{movie?.title}</h1>
                 <Button variant="ghost" className="text-white">
                   <Share className="h-5 w-5 mr-2" />
                   Share
@@ -224,7 +259,7 @@ const MovieDetailPage = () => {
                     <span className="ml-1 text-xl font-bold">9.3/10</span>
                   </div>
                   <div className="flex items-center">
-                    <span className="text-sm text-gray-400">(139.6K Votes)</span>
+                    <span className="text-sm text-gray-400">({movie?.upvotes} Votes)</span>
                     <ChevronRight className="h-5 w-5 text-gray-400" />
                   </div>
                 </div>
@@ -245,13 +280,13 @@ const MovieDetailPage = () => {
               
               {/* Movie Meta Information */}
               <div className="text-gray-400 mb-8">
-                <span>2h 46m</span>
+                <span>{movie?.runtime}</span>
                 <span className="mx-2">•</span>
-                <span>Drama, Family, Thriller</span>
+                <span>{movie?.genre}</span>
                 <span className="mx-2">•</span>
-                <span>UA16+</span>
+                <span>U/A 16+</span>  
                 <span className="mx-2">•</span>
-                <span>25 Apr, 2025</span>
+                <span>{movie?.release_date}</span>
               </div>
               
               {/* Book Tickets Button */}
@@ -267,10 +302,7 @@ const MovieDetailPage = () => {
       <div className="container mx-auto px-4 py-8">
         <h2 className="text-2xl font-bold mb-4">About the movie</h2>
         <p className="text-gray-700 mb-6">
-          In the quiet hill town of Ranni, Pathanamthitta, Shanmughan navigates life as a humble taxi driver. 
-          His heart belongs to one thing - his old Ambassador car. To others, it may just be an ageing vehicle, 
-          but to Shanmughan, it is like a part of his family. His life, however, is a journey filled with 
-          challenges, proving just how far he is willing to go for something so dear to him.
+        {movie?.description}
         </p>
         
         <div className="border-b border-gray-200 my-8"></div>
