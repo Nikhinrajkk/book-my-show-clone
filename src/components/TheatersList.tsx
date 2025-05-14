@@ -1,7 +1,12 @@
 
 import React from 'react';
-import { Heart } from 'lucide-react';
+import { Heart, Info } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import { 
+  HoverCard,
+  HoverCardTrigger,
+  HoverCardContent
+} from '@/components/ui/hover-card';
 
 interface ShowTime {
   time: string;
@@ -100,7 +105,7 @@ const TheaterItem: React.FC<{ theater: Theater }> = ({ theater }) => {
         <div className="flex items-center gap-2">
           <Heart className="text-gray-400 hover:text-bms-red cursor-pointer" size={18} />
           <h3 className="font-medium">{theater.name}</h3>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-info text-gray-400"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+          <Info className="text-gray-400" size={16} />
         </div>
         <div className="text-xs text-gray-500">
           {theater.cancellable ? "Cancellation Available" : "Non-cancellable"}
@@ -109,13 +114,42 @@ const TheaterItem: React.FC<{ theater: Theater }> = ({ theater }) => {
 
       <div className="flex flex-wrap gap-3 mt-4">
         {theater.showTimes.map((show, index) => (
-          <div key={index} className="border border-gray-300 rounded px-4 py-2 text-bms-green cursor-pointer hover:border-bms-green">
-            <div className="text-sm">{show.time}</div>
-            {show.format && <div className="text-xs text-gray-500">{show.format}</div>}
-          </div>
+          <ShowTimeWithTooltip key={index} show={show} />
         ))}
       </div>
     </div>
+  );
+};
+
+const ShowTimeWithTooltip: React.FC<{ show: ShowTime }> = ({ show }) => {
+  return (
+    <HoverCard>
+      <HoverCardTrigger asChild>
+        <div className="border border-gray-300 rounded px-4 py-2 text-bms-green cursor-pointer hover:border-bms-green">
+          <div className="text-sm">{show.time}</div>
+          {show.format && <div className="text-xs text-gray-500">{show.format}</div>}
+        </div>
+      </HoverCardTrigger>
+      <HoverCardContent className="w-auto p-3">
+        <div className="space-y-2">
+          <h4 className="text-sm font-medium">Ticket Information</h4>
+          <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs">
+            <div className="text-gray-500">RECLINER:</div>
+            <div>₹ 600.00</div>
+            <div className="text-gray-500">ELITE:</div>
+            <div>₹ 330.00</div>
+            <div className="text-gray-500">PRIME:</div>
+            <div>₹ 270.00</div>
+            <div className="text-gray-500">CLASSIC:</div>
+            <div>₹ 210.00</div>
+          </div>
+          <div className="pt-1 text-xs text-gray-500 border-t">
+            <p>Internet handling fees apply</p>
+            <p>Available seats may vary</p>
+          </div>
+        </div>
+      </HoverCardContent>
+    </HoverCard>
   );
 };
 
