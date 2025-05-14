@@ -35,7 +35,7 @@ const SeatLayout = () => {
         </div>
       </header>
 
-      <div className="p-4 overflow-auto flex-1 flex flex-col items-center">
+      <div className="w-full flex flex-col items-center">
         {/* Show time badges */}
         <div className="flex gap-4 mb-8 w-full max-w-3xl">
           <ShowTimeBadge 
@@ -53,14 +53,14 @@ const SeatLayout = () => {
         </div>
 
         {/* Main content */}
-        <div className="w-full max-w-3xl space-y-4 mb-8">
+        <div className="w-full space-y-4 mb-8 bg-[#fafafa]">
           {/* Seat grid */}
           <SeatSelectionGrid />
 
-          {/* Screen indicator */}
-          <div className="relative py-8 flex justify-center">
-            <div className="w-2/3 h-4 bg-blue-100 rounded-t-3xl opacity-70"></div>
-            <div className="absolute bottom-0 w-full text-center text-sm text-gray-500">
+          {/* Screen indicator - styled to match the provided HTML */}
+          <div className="relative max-w-3xl py-6 flex flex-col items-center mt-4 mx-auto">
+            <div className="w-2/3 h-3 bg-gray-300 rounded-t-3xl opacity-70 shadow-lg"></div>
+            <div className="text-center text-sm text-gray-500 mt-2">
               All eyes this way please!
             </div>
           </div>

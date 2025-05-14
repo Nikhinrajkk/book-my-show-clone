@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
 
@@ -15,7 +14,7 @@ interface SeatData {
 const SeatSelectionGrid: React.FC = () => {
   const [seats, setSeats] = useState<Record<string, SeatData[]>>(generateSeats());
   
-  // Generate seat data
+  // Generate seat data based on the provided HTML structure and image
   function generateSeats(): Record<string, SeatData[]> {
     // First section - Premium rows (M, L, K)
     const premiumRows = ['M', 'L', 'K'];
@@ -26,25 +25,27 @@ const SeatSelectionGrid: React.FC = () => {
     const seatsByRow: Record<string, SeatData[]> = {};
     
     allRows.forEach(row => {
-      const maxSeats = row === 'M' || row === 'L' ? 10 : 20;
       seatsByRow[row] = [];
+      const maxSeats = 20; // All rows have up to 20 seats
       
       for (let i = 1; i <= maxSeats; i++) {
         // Default to sold for most seats
         let status: SeatStatus = 'sold';
         
         // Make specific seats available based on the reference image
-        if ((row === 'M' && i === 1) || 
-            (row === 'L' && i === 4) ||
-            (row === 'C' && [2, 3, 7, 8, 9, 11].includes(i)) ||
-            (row === 'B' && i >= 3 && i <= 20) ||
-            (row === 'A' && i >= 1 && i <= 20)) {
+        if (
+          // Premium section available seats
+          (row === 'M' && [7, 8, 9,].includes(i)) ||
+          (row === 'L' && (i === 3 || i === 10)) ||
+          (row === 'K' && i === 14) ||
+          // Standard section available seats
+          (row === 'E' && i === 16) ||
+          (row === 'D' && [6, 18, 19, 20].includes(i)) ||
+          (row === 'C' && [4, 5, 6, 17, 18, 19, 20].includes(i)) ||
+          (row === 'B' && i >= 1 && i <= 20) ||
+          (row === 'A' && i >= 1 && i <= 20)
+        ) {
           status = 'available';
-        }
-        
-        // Set selected seats (green in the image)
-        if ((row === 'M' && i === 1) || (row === 'L' && i === 4)) {
-          status = 'selected';
         }
         
         seatsByRow[row].push({
@@ -76,17 +77,35 @@ const SeatSelectionGrid: React.FC = () => {
   };
   
   const renderSeat = (seat: SeatData) => {
-    let seatClass = "w-6 h-6 flex items-center justify-center text-xs rounded-sm mx-0.5 my-1 ";
+    // Empty seat pattern based on the reference image
+    const shouldRenderEmpty = (
+      // M row empty seats
+      (seat.row === 'M' && (seat.number < 5 || seat.number > 18)) ||
+      // L row empty seats
+      (seat.row === 'L' && (seat.number < 5 || seat.number > 18)) ||
+      // K row empty seats
+      (seat.row === 'K' && (seat.number < 5 || seat.number > 18)) ||
+      // Standard section empty seats (first two spots in each row)
+      ((seat.row === 'J' || seat.row === 'H' || seat.row === 'G' || 
+        seat.row === 'F' || seat.row === 'E' || seat.row === 'D' || 
+        seat.row === 'C' || seat.row === 'B' || seat.row === 'A') && seat.number < 3)
+    );
+    
+    if (shouldRenderEmpty) {
+      return <div className="seatI w-6 h-6 mx-0.5 my-1">&nbsp;</div>;
+    }
+    
+    let seatClass = "w-6 h-6 flex items-center justify-center text-xs rounded-[2px] m-1 ";
     
     switch (seat.status) {
       case 'available':
-        seatClass += "border border-green-500 text-green-500 cursor-pointer hover:bg-green-50";
+        seatClass += "border border-[#1ea83c] text-[#1ea83c] cursor-pointer hover:bg-green-50";
         break;
       case 'selected':
-        seatClass += "bg-green-500 text-white cursor-pointer";
+        seatClass += "bg-[#1ea83c] text-white cursor-pointer";
         break;
       case 'sold':
-        seatClass += "bg-gray-200 text-gray-400 cursor-not-allowed";
+        seatClass += "bg-[#eee] cursor-not-allowed";
         break;
     }
     
@@ -106,7 +125,7 @@ const SeatSelectionGrid: React.FC = () => {
   const standardRows = ['J', 'H', 'G', 'F', 'E', 'D', 'C', 'B', 'A'];
   
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center bg-[#fafafa]">
       {/* Premium section */}
       <div className="w-full mb-4">
         <div className="text-center py-2 border-b border-gray-200">
@@ -116,14 +135,21 @@ const SeatSelectionGrid: React.FC = () => {
         <div className="flex flex-col items-center space-y-1 mt-2">
           {premiumRows.map(row => (
             <div key={row} className="flex items-center">
-              <div className="w-6 text-center text-gray-500">{row}</div>
+              <div className="w-6 text-center text-[#b3b3b3] text-sm mr-1.5 ">{row}</div>
               <div className="flex flex-wrap justify-center">
-                {seats[row]?.map(seat => renderSeat(seat))}
+                {seats[row]?.map((seat) => (
+                  <React.Fragment key={seat.id}>
+                    {renderSeat(seat)}
+                  </React.Fragment>
+                ))}
               </div>
             </div>
           ))}
         </div>
       </div>
+
+      {/* Spacer */}
+      <div className="h-4"></div>
 
       {/* Standard section */}
       <div className="w-full">
@@ -134,9 +160,13 @@ const SeatSelectionGrid: React.FC = () => {
         <div className="flex flex-col items-center space-y-1 mt-2">
           {standardRows.map(row => (
             <div key={row} className="flex items-center">
-              <div className="w-6 text-center text-gray-500">{row}</div>
+              <div className="w-6 text-center text-[#b3b3b3] text-sm mr-1.5 mt-2.5">{row}</div>
               <div className="flex flex-wrap justify-center">
-                {seats[row]?.map(seat => renderSeat(seat))}
+                {seats[row]?.map((seat) => (
+                  <React.Fragment key={seat.id}>
+                    {renderSeat(seat)}
+                  </React.Fragment>
+                ))}
               </div>
             </div>
           ))}
