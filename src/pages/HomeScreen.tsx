@@ -8,8 +8,11 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { ChevronRight } from "lucide-react";
+import { ChevronDown, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { LoginDialog } from "@/components/login";
+import { getMovies, getSession, handleLogout } from "@/api";
 
 // Movie data type
 interface Movie {
@@ -22,50 +25,27 @@ interface Movie {
   imageUrl: string;
 }
 
+interface MovieApiResponse {
+  id: number;
+  title: string;
+  genre: string;
+  rating: string | null;
+  upvotes: string;
+  poster_url: string;
+}
+
+function mapMoviesToRecommended(input: MovieApiResponse[]): Movie[] {
+  return input.map(movie => ({
+    id: movie.id,
+    title: movie.title,
+    genres: movie.genre.split(',').map((g: string) => g.trim()),
+    rating: movie.rating ? parseFloat(movie.rating) : 0,
+    votes: movie.rating ? movie.upvotes : "",
+    imageUrl: movie.poster_url
+  }));
+}
+
 // Movie data
-const recommendedMovies: Movie[] = [
-  {
-    id: 1,
-    title: "Thudarum",
-    genres: ["Drama", "Family", "Thriller"],
-    rating: 9.3,
-    votes: "139.3K",
-    imageUrl: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
-  },
-  {
-    id: 2,
-    title: "Prince and Family",
-    genres: ["Comedy", "Drama", "Family"],
-    rating: 8.9,
-    votes: "6.8K",
-    imageUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475",
-  },
-  {
-    id: 3,
-    title: "Padakkalam",
-    genres: ["Comedy", "Drama", "Fantasy", "Supernatural"],
-    rating: 9,
-    votes: "3.9K",
-    imageUrl: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6",
-  },
-  {
-    id: 4,
-    title: "Final Destination Bloodlines",
-    genres: ["Horror", "Supernatural", "Thriller"],
-    rating: 0,
-    votes: "", // empty string to fix the TS error
-    likes: "73.2K",
-    imageUrl: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5",
-  },
-  {
-    id: 5,
-    title: "Sarkeet",
-    genres: ["Drama", "Family"],
-    rating: 9,
-    votes: "1.7K",
-    imageUrl: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7",
-  }
-];
 
 // Event category data
 interface EventCategory {
@@ -115,8 +95,32 @@ const eventCategories: EventCategory[] = [
 ];
 
 const MovieHomePage = () => {
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [session, setSession] = useState(null);
+  const [movies, setMovies] = useState<Movie[]>([]);
+  
+  useEffect(() => {
+    const fetchSession = async () => {
+      const data = await getSession();
+      setSession(data);
+      const apiMovies = await getMovies();
+      const mappedMovies = mapMoviesToRecommended(apiMovies);
+      setMovies(prevMovies => [...prevMovies, ...mappedMovies]);
+    };
+    fetchSession();
+  }, []);
+
+  useEffect(() => {
+    console.log('session from home pageee',session)
+  }, [session])
+
+  const logout = async () => {
+    await handleLogout();
+    setSession(null);
+  }
   return (
-    <div className="flex flex-col min-h-screen bg-gray-100">
+    <div className="flex flex-col min-h-screen bg-white">
+      <LoginDialog open={isLoginOpen} onOpenChange={setIsLoginOpen} />
       {/* Header */}
       <header className="bg-white shadow-sm sticky top-0 z-10">
         <div className="container mx-auto px-4">
@@ -140,10 +144,28 @@ const MovieHomePage = () => {
             <div className="flex items-center space-x-4">
               <div className="flex items-center">
                 <span className="mr-2">Kochi</span>
-                <ChevronRight className="h-4 w-4" />
+                <ChevronDown className="h-4 w-4" />
               </div>
-              <Button className="bg-red-500 hover:bg-red-600">Sign in</Button>
-              <Button variant="ghost">
+              {session?.user?.user_metadata?.name ? (
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-full overflow-hidden">
+                    <img 
+                      src={session.user.user_metadata?.avatar_url} 
+                      alt="Profile"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <span>Hi, {session.user.user_metadata?.full_name}</span>
+                </div>
+              ) : (
+                <Button 
+                  className="bg-red-500 hover:bg-red-600"
+                  onClick={() => setIsLoginOpen(true)}
+                >
+                  Sign in
+                </Button>
+              )}
+              <Button onClick={() => logout()} variant="ghost">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
@@ -212,36 +234,32 @@ const MovieHomePage = () => {
         {/* Recommended Movies */}
         <div className="mb-8">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-2xl font-bold text-gray-800">Recommended Movies</h2>
+            <h2 className="text-2xl font-bold text-gray-800 mx-[100px]">Recommended Movies</h2>
             <Link to="/all-movies" className="text-red-500 flex items-center">
-              See All <ChevronRight className="h-4 w-4" />
+              See All <ChevronRight className="h-4 w-4 mr-[100px]" />
             </Link>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {recommendedMovies.map(movie => (
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8 px-[100px]">
+            {movies.map(movie => (
               <MovieCard key={movie.id} movie={movie} />
             ))}
           </div>
         </div>
         
         {/* Stream Banner */}
-        <div className="mb-8">
-          <div className="h-32 bg-[#0c111f] rounded-lg overflow-hidden relative">
-            <div className="flex h-full items-center justify-between px-10">
-              <div className="text-white">
-                <span className="text-white text-xl font-bold">book</span>
-                <span className="text-red-500 text-xl font-bold">my</span>
-                <span className="text-white text-xl font-bold">show</span>
-                <h3 className="text-4xl font-bold">STREAM</h3>
-              </div>
-              <h2 className="text-3xl font-bold text-yellow-400">Endless Entertainment Anytime. Anywhere!</h2>
-            </div>
+        <div className="mb-8 mx-[100px]">
+          <div className="h-32 w-full rounded-lg overflow-hidden relative">
+            <img 
+              src="https://assets-in.bmscdn.com/discovery-catalog/collections/tr:w-1440,h-120/stream-leadin-web-collection-202210241242.png"
+              alt="Stream Banner"
+              className="w-auto object-cover"
+            />
           </div>
         </div>
         
         {/* Live Events */}
-        <div className="mb-8">
+        <div className="mb-8    mx-[100px]">
           <h2 className="text-2xl font-bold text-gray-800 mb-4">The Best Of Live Events</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {eventCategories.map(category => (
@@ -269,30 +287,37 @@ const NavItem = ({ label, active = false }: { label: string; active?: boolean })
 // Movie Card Component
 const MovieCard = ({ movie }: { movie: Movie }) => (
   <Link to={`/movie/${movie.id}`} className="block">
-    <div className="rounded-lg overflow-hidden bg-white shadow">
-      <div className="h-64 bg-gray-200 relative">
-        <img src={movie.imageUrl} alt={movie.title} className="w-full h-full object-cover" />
-      </div>
-      <div className="p-4">
-        <div className="flex items-center mb-1">
-          {movie.likes ? (
-            <>
-              <svg className="w-5 h-5 text-green-500 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
-              </svg>
-              <span className="text-green-500 font-bold">{movie.likes} Likes</span>
-            </>
-          ) : (
-            <>
-              <svg className="w-5 h-5 text-red-500 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
-              </svg>
-              <span className="text-red-500 font-bold">{movie.rating}/10</span>
-              <span className="ml-2 text-gray-600">{movie.votes} Votes</span>
-            </>
-          )}
+    <div className="rounded-lg overflow-hidden">
+      <div className="aspect-[2/3] relative">
+        <img 
+          src={movie.imageUrl} 
+          alt={movie.title} 
+          className="w-full h-full object-cover"
+        />
+        {/* Rating overlay at bottom */}
+        <div className="p-2 bg-black rounded-b-lg">
+          <div className="flex items-center">
+            {movie.likes ? (
+              <div className="flex items-center">
+                <svg className="w-5 h-5 text-green-500 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+                </svg>
+                <span className="text-green-500 font-bold text-sm">{movie.likes} Likes</span>
+              </div>
+            ) : (
+              <div className="flex items-center">
+                <svg className="w-5 h-5 text-red-500 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                <span className="text-red-500 font-bold text-sm">{movie.rating}/10</span>
+                <span className="ml-2 text-white text-xs">{movie.votes} Votes</span>
+              </div>
+            )}
+          </div>
         </div>
-        <h3 className="font-bold text-lg">{movie.title}</h3>
+      </div>
+      <div className="p-3">
+        <h3 className="font-bold text-base text-gray-900 mb-1">{movie.title}</h3>
         <p className="text-sm text-gray-600">{movie.genres.join("/")}</p>
       </div>
     </div>
