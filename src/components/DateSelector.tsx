@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import FilterOptions from './FilterOptions';
 
 interface DateProps {
   day: string;
@@ -38,7 +39,7 @@ const DateSelector = () => {
   
   return (
     <div className="w-full bg-white border-b border-gray-200 py-2 shadow-[0px_2px_4px_0.5px_rgba(0,0,0,0.2)]">
-      <div className="container mx-auto px-4 max-w-[80%]">
+      <div className="container mx-auto px-4 max-w-[80%] flex justify-between">
         <div className="flex overflow-x-auto gap-2 no-scrollbar py-2">
           {dateItems.map((item) => (
             <DateItem 
@@ -51,6 +52,9 @@ const DateSelector = () => {
             />
           ))}
         </div>
+
+        <FilterOptions />
+
       </div>
     </div>
   );
