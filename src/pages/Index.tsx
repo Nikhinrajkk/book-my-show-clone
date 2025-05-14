@@ -1,12 +1,88 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React from 'react';
+import Navbar from '@/components/Navbar';
+import DateSelector from '@/components/DateSelector';
+import MovieHeader from '@/components/MovieHeader';
+import TheatersList from '@/components/TheatersList';
 
 const Index = () => {
+  // Mock data for theaters
+  const theaters = [
+    {
+      id: "1",
+      name: "PVR: Forum Mall, Kochi",
+      location: "Forum Mall, Kochi",
+      cancellable: true,
+      showTimes: [
+        { time: "09:00 AM", format: "PM" },
+        { time: "01:25 PM", format: "UMX" },
+        { time: "04:00 PM", format: "PM" },
+        { time: "07:30 PM", format: "PM" },
+        { time: "11:00 PM", format: "PM" },
+      ]
+    },
+    {
+      id: "2",
+      name: "Cinepolis: VIP Centre Square Mall, Kochi",
+      location: "Centre Square Mall, Kochi",
+      cancellable: false,
+      showTimes: [
+        { time: "09:15 AM", format: "DOLBY 7.1" },
+        { time: "12:40 PM", format: "DOLBY 7.1" },
+        { time: "04:05 PM", format: "DOLBY 7.1" },
+        { time: "07:30 PM", format: "DOLBY 7.1" },
+        { time: "11:00 PM", format: "DOLBY 7.1" },
+      ]
+    },
+    {
+      id: "3",
+      name: "Shenoys: Kochi",
+      location: "Kochi",
+      cancellable: true,
+      showTimes: [
+        { time: "11:30 AM", format: "4K DOLBY 7.1" },
+        { time: "03:00 PM", format: "4K DOLBY 7.1" },
+        { time: "06:30 PM", format: "4K DOLBY 7.1" },
+        { time: "10:00 PM", format: "4K DOLBY 7.1" },
+      ]
+    },
+    {
+      id: "4",
+      name: "PVR: Lulu, Kochi",
+      location: "Lulu Mall, Kochi",
+      cancellable: false,
+      showTimes: [
+        { time: "10:30 AM", format: "Atmos" },
+        { time: "04:30 PM", format: "Atmos" },
+        { time: "10:30 PM", format: "Atmos" },
+      ]
+    },
+    {
+      id: "5",
+      name: "PVR: Oberon Mall, Kochi",
+      location: "Oberon Mall, Kochi",
+      cancellable: true,
+      showTimes: [
+        { time: "10:35 AM", format: "" },
+        { time: "12:50 PM", format: "" },
+        { time: "06:45 PM", format: "" },
+      ]
+    }
+  ];
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-gray-50">
+      <Navbar />
+      
+      <MovieHeader 
+        title="Mission: Impossible - The Final Reckoning - (English)" 
+        certification="UA13+" 
+        genres={["Action", "Adventure", "Thriller"]} 
+      />
+      
+      <DateSelector />
+      
+      <TheatersList theaters={theaters} />
     </div>
   );
 };
