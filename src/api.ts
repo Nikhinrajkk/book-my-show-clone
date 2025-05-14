@@ -57,9 +57,9 @@ const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
     const { data: orderData, error: orderError } = await supabase.functions.invoke('make-payment', {
         method: 'POST',
         body: {
-            amount: 100,
+            amount: 411.92,
             currency: 'INR',
-            orderId: '411.92', // show id of the movie
+            orderId: '1', // show id of the movie
             user_Id: '1234',
             // seats: '1234',
             booking_time: new Date().toISOString()

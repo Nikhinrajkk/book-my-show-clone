@@ -44,38 +44,38 @@ const castMembers: CastMember[] = [
     id: 1,
     name: "Mohanlal",
     role: "as Shanmughan",
-    imageUrl: "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
+    imageUrl: "https://in.bmscdn.com/iedb/artist/images/website/poster/large/mohanlal-1502-24-03-2017-12-30-59.jpg"
   },
   {
     id: 2,
     name: "Shobana",
     role: "as Lalitha Shanmughan",
-    imageUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475",
+    imageUrl: "https://in.bmscdn.com/iedb/artist/images/website/poster/large/shobana-2730-1659090871.jpg"
   },
   {
     id: 3,
     name: "Maniyanpilla Raju",
     role: "as Kuttichan",
-    imageUrl: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6",
+    imageUrl: "https://in.bmscdn.com/iedb/artist/images/website/poster/large/maniyanpilla-raju-18342-24-03-2017-17-51-27.jpg"
   },
   {
     id: 4,
     name: "Irshad Ali",
     role: "as Shaji",
-    imageUrl: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5",
+    imageUrl: "https://in.bmscdn.com/iedb/artist/images/website/poster/large/irshad-ali-iein111375-16-10-2017-16-27-26.jpg"
   },
   {
     id: 5,
     name: "Binu Pappu",
     role: "as SI Benny",
-    imageUrl: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7",
+    imageUrl: "https://assets-in.bmscdn.com/iedb/artist/images/website/poster/large/binu-pappu-2027314-1690198877.jpg"
   },
   {
     id: 6,
     name: "Farhan Fazil",
     role: "as CPO Sudheesh",
-    imageUrl: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
-  },
+    imageUrl: "https://in.bmscdn.com/iedb/artist/images/website/poster/large/farhaan-faasil-1047111-18-01-2022-03-50-42.jpg"
+  }
 ];
 
 // Mock Data for Crew
@@ -84,38 +84,38 @@ const crewMembers: CrewMember[] = [
     id: 1,
     name: "Tharun Moorthy",
     role: "Director, Screenplay",
-    imageUrl: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81",
+    imageUrl: "https://assets-in.bmscdn.com/iedb/artist/images/website/poster/large/tharun-moorthy-2009111-10-02-2021-01-20-11.jpg"
   },
   {
     id: 2,
     name: "M.Renjith",
     role: "Producer",
-    imageUrl: "https://images.unsplash.com/photo-1500673922987-e212871fec22",
+    imageUrl: "https://assets-in.bmscdn.com/iedb/artist/images/website/poster/large/mrenjith-2046750-1745064965.jpg"
   },
   {
     id: 3,
     name: "Jakes Bejoy",
     role: "Musician",
-    imageUrl: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81",
+    imageUrl: "https://assets-in.bmscdn.com/iedb/artist/images/website/poster/large/jakes-bejoy-1050437-17-05-2019-03-06-39.jpg"
   },
   {
     id: 4,
     name: "Avantika Renjith",
     role: "Executive Producer",
-    imageUrl: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81",
+    imageUrl: "https://assets-in.bmscdn.com/iedb/artist/images/website/poster/large/avantika-renjith-2046752-1745065424.jpg"
   },
   {
     id: 5,
     name: "K.R.Sunil",
     role: "Screenplay",
-    imageUrl: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81",
+    imageUrl: "https://assets-in.bmscdn.com/iedb/artist/images/website/poster/large/krsunil-2046751-1745065117.jpg"
   },
   {
     id: 6,
     name: "Shaji Kumar",
     role: "Cinematographer",
-    imageUrl: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81",
-  },
+    imageUrl: "https://assets-in.bmscdn.com/iedb/artist/images/website/poster/large/shaji-kumar-1091875-10-04-2018-01-00-27.jpg"
+  }
 ];
 
 // Review Tags
@@ -353,7 +353,7 @@ const MovieDetailPage = () => {
         <Carousel className="mb-8">
           <CarouselContent>
             {castMembers.map((member) => (
-              <CarouselItem key={member.id} className="basis-1/6">
+              <CarouselItem key={member.id} className="basis-1/5">
                 <CastCard member={member} />
               </CarouselItem>
             ))}
