@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent } from "@/components/ui/card";
 import { 
   Carousel,
   CarouselContent,
@@ -13,6 +12,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { LoginDialog } from "@/components/login";
 import { getMovies, getSession, handleLogout } from "@/api";
+import Footer from "@/components/Footer";
 
 // Movie data type
 interface Movie {
@@ -286,6 +286,9 @@ const MovieHomePage = () => {
           </div>
         </div>
       </main>
+
+      <Footer />
+
     </div>
   );
 };
