@@ -245,12 +245,12 @@ const MovieDetailPage = () => {
         <div className="container mx-auto relative z-0 py-8">
           <div className="flex flex-col md:flex-row">
             {/* Movie Poster Card */}
-            <div className="w-full md:w-80 flex-shrink-0 mb-6 md:mb-0">
-              <div className="relative rounded-lg overflow-hidden shadow-lg border-2 border-gray-800">
+            <div className="w-full md:w-[261px] flex-shrink-0 mb-6 md:mb-0 h-[392px]">
+              <div className="relative rounded-lg overflow-hidden shadow-lg w-[] h-[392px]">
                 <img 
                   src="https://jdswukniiyawdpfkpvjn.supabase.co/storage/v1/object/public/vibe-bucket/movies/thudarum.png" 
                   alt="Thudarum" 
-                  className="w-full h-[350px] object-cover"
+                  className="w-[261px] h-[392px] object-cover"
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-black/70 text-center py-2">
                   <p className="text-white text-sm">In cinemas</p>

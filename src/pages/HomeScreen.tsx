@@ -123,7 +123,7 @@ const MovieHomePage = () => {
       <LoginDialog open={isLoginOpen} onOpenChange={setIsLoginOpen} />
       {/* Header */}
       <header className="bg-white shadow-sm sticky top-0 z-10">
-        <div className="container mx-auto max-w-[85%] px-4">
+        <div className="container mx-auto max-w-[1240px] w-[92%]">
           <div className="flex items-center justify-between py-4">
             <div className="flex items-center">
               <Link to="/" className="text-xl font-bold">
@@ -176,7 +176,7 @@ const MovieHomePage = () => {
         
         {/* Navigation */}
         <nav className="border-t border-gray-200">
-          <div className="container mx-auto max-w-[85%] px-4">
+          <div className="container mx-auto max-w-[1240px] w-[92%] px-4">
             <div className="flex justify-between">
               <div className="flex space-x-8">
                 <NavItem label="Movies" active />
@@ -198,10 +198,10 @@ const MovieHomePage = () => {
       </header>
       
       {/* Main Content */}
-      <main className="flex-grow container mx-auto px-4 py-4">
+      <main className="flex-grow container mx-auto max-w-[1240px] w-[92%] py-4">
         {/* Main Carousel */}
         <div className="relative mb-8">
-          <Carousel className="w-[85%] mx-auto">
+          <Carousel className="w-full mx-auto">
             <CarouselContent>
               <CarouselItem>
                 <div className="h-[297px] bg-black relative rounded-lg overflow-hidden">
@@ -211,13 +211,6 @@ const MovieHomePage = () => {
                       alt="Carousel" 
                       className="w-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent flex items-center pl-16">
-                      <div className="text-white">
-                        <h2 className="text-5xl font-bold mb-2">Unlock ₹500 off*</h2>
-                        <h3 className="text-4xl font-bold mb-6">on LIVE gigs</h3>
-                        <Button className="bg-red-500 hover:bg-red-600 px-8 py-6 text-lg">Apply Now</Button>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </CarouselItem>
@@ -229,13 +222,6 @@ const MovieHomePage = () => {
                       alt="Carousel" 
                       className="w-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent flex items-center pl-16">
-                      <div className="text-white">
-                        <h2 className="text-5xl font-bold mb-2">Unlock ₹500 off*</h2>
-                        <h3 className="text-4xl font-bold mb-6">on LIVE gigs</h3>
-                        <Button className="bg-red-500 hover:bg-red-600 px-8 py-6 text-lg">Apply Now</Button>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </CarouselItem>
@@ -250,15 +236,15 @@ const MovieHomePage = () => {
         </div>
         
         {/* Recommended Movies */}
-        <div className="mb-8">
+        <div className="mb-8 w-full">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-2xl font-bold text-gray-800 mx-[100px]">Recommended Movies</h2>
+            <h2 className="text-2xl font-bold text-gray-800">Recommended Movies</h2>
             <Link to="/all-movies" className="text-red-500 flex items-center">
-              See All <ChevronRight className="h-4 w-4 mr-[100px]" />
+              See All <ChevronRight className="h-4 w-4" />
             </Link>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8 px-[100px]">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8 mb-8">
             {movies.map(movie => (
               <MovieCard key={movie.id} movie={movie} />
             ))}
@@ -266,7 +252,7 @@ const MovieHomePage = () => {
         </div>
         
         {/* Stream Banner */}
-        <div className="mb-8 mx-[100px]">
+        <div className="mb-8">
           <div className="h-32 w-full rounded-lg overflow-hidden relative">
             <img 
               src="https://assets-in.bmscdn.com/discovery-catalog/collections/tr:w-1440,h-120/stream-leadin-web-collection-202210241242.png"
@@ -277,7 +263,7 @@ const MovieHomePage = () => {
         </div>
         
         {/* Live Events */}
-        <div className="mb-8    mx-[100px]">
+        <div className="mb-8">
           <h2 className="text-2xl font-bold text-gray-800 mb-4">The Best Of Live Events</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {eventCategories.map(category => (

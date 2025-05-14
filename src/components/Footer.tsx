@@ -8,7 +8,7 @@ const Footer = () => {
   return (
     <footer className="bg-[#333338] text-gray-300 pt-4 mt-10">
       {/* List your show banner */}
-      <div className="bg-[#333338] py-3 max-w-[85%] mx-auto">
+      <div className="bg-[#333338] py-3 max-w-[1240px] w-[92%] mx-auto">
         <div className=" mx-auto flex flex-col md:flex-row items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="text-white">
@@ -28,7 +28,7 @@ const Footer = () => {
       {/* Customer support section */}
       <div className="w-full mx-auto  bg-[#404043] ">
 
-      <div className=" mx-auto py-8 grid grid-cols-1 md:grid-cols-3 gap-8 text-center max-w-[85%] ">
+      <div className=" mx-auto py-8 grid grid-cols-1 md:grid-cols-3 gap-8 text-center max-w-[1240px] w-[92%] ">
         <div className="flex flex-col items-center">
           <div className="mb-3 border border-gray-500 rounded-full p-3">
             <Headphones size={30} strokeWidth={1} />
@@ -55,7 +55,7 @@ const Footer = () => {
 
       
       {/* Movies categories */}
-      <div className="bg-[#333338] py-6 max-w-[85%] mx-auto">
+      <div className="bg-[#333338] py-6 max-w-[1240px] w-[92%] mx-auto">
         <div className="container mx-auto px-4">
           <div className="mb-6">
             <h4 className="text-sm font-medium mb-3">MOVIES NOW SHOWING</h4>
@@ -151,7 +151,7 @@ const Footer = () => {
       </div>
       
       {/* Copyright */}
-      <div className="bg-[#333338] py-4 text-center text-xs text-gray-400 max-w-[85%] mx-auto">
+      <div className="bg-[#333338] py-4 text-center text-xs text-gray-400 max-w-[1240px] w-[92%] mx-auto">
         <div className="container mx-auto px-4">
           <p>Copyright 2025 © Bigtree Entertainment Pvt. Ltd. All Rights Reserved.</p>
           <p className="mt-2">The content and images used on this site are copyright protected and copyrights vests with the respective owners. The usage of the content and images on this website is intended to promote the works and no endorsement of the artist shall be implied. Unauthorized use is prohibited and punishable by law.</p>
