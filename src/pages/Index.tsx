@@ -1,10 +1,10 @@
-
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import DateSelector from '@/components/DateSelector';
 import MovieHeader from '@/components/MovieHeader';
 import TheatersList from '@/components/TheatersList';
 import Footer from '@/components/Footer';
+import Legend from '@/components/Legend';
 
 const Index = () => {
   // Mock data for theaters
@@ -74,17 +74,14 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-[#F5F5F5]">
       <Navbar />
-      
       <MovieHeader 
         title="Mission: Impossible - The Final Reckoning - (English)" 
         certification="UA13+" 
         genres={["Action", "Adventure", "Thriller"]} 
       />
-      
       <DateSelector />
-      
+      <Legend />
       <TheatersList theaters={theaters} />
-
       <Footer />
     </div>
   );
