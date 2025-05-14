@@ -28,14 +28,14 @@ export function LoginDialog({ open, onOpenChange }: LoginDialogProps) {
         <DialogHeader className="p-6 pb-2 space-y-2">
           <div className="flex justify-between items-center">
             <DialogTitle className="text-xl font-semibold">Get Started</DialogTitle>
-            <Button 
+            {/* <Button 
               variant="ghost" 
               className="h-8 w-8 p-0 rounded-full" 
               onClick={() => onOpenChange(false)}
             >
               <X className="h-4 w-4" />
               <span className="sr-only">Close</span>
-            </Button>
+            </Button> */}
           </div>
         </DialogHeader>
 

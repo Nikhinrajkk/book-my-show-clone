@@ -123,7 +123,7 @@ const MovieHomePage = () => {
       <LoginDialog open={isLoginOpen} onOpenChange={setIsLoginOpen} />
       {/* Header */}
       <header className="bg-white shadow-sm sticky top-0 z-10">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto max-w-[85%] px-4">
           <div className="flex items-center justify-between py-4">
             <div className="flex items-center">
               <Link to="/" className="text-xl font-bold">
@@ -176,7 +176,7 @@ const MovieHomePage = () => {
         
         {/* Navigation */}
         <nav className="border-t border-gray-200">
-          <div className="container mx-auto px-4">
+          <div className="container mx-auto max-w-[85%] px-4">
             <div className="flex justify-between">
               <div className="flex space-x-8">
                 <NavItem label="Movies" active />

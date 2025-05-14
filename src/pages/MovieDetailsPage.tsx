@@ -126,9 +126,20 @@ const MovieDetailPage = () => {
   const navigate = useNavigate();
   const [isLoginOpen, setIsLoginOpen] = useState(false);
 
-  const [movie, setMovie] = useState<any>(null);
-  const { id } = useParams();
+  interface Movie {
+    id: string;
+    title: string;
+    description?: string;
+    imageUrl?: string;
+    upvotes?: number;
+    runtime?: string;
+    genre?: string;
+    release_date?: string;
+    // Add other movie properties as needed
+  }
 
+  const [movie, setMovie] = useState<Movie | null>(null);
+  const { id } = useParams();
 
   useEffect(() => {
     const fetchMovie = async () => {
