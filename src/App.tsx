@@ -6,7 +6,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-import MovieDetailPage from "./pages/MovieDetailPage";
+import MovieDetailsPage from "./pages/MovieDetailsPage";
+import MovieHomePage from "./pages/HomeScreen";
 
 const queryClient = new QueryClient();
 
@@ -17,10 +18,10 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/movie/:id" element={<MovieDetailPage />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="/" element={<MovieHomePage />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/movie/:id" element={<MovieDetailsPage />} />
+          <Route path='/select-theater' element={<Index />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
