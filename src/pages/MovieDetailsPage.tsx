@@ -1,6 +1,6 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { ChevronRight, Star, Share } from "lucide-react";
+import { ChevronRight, Star, Share, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
@@ -8,7 +8,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext } from "@/components/ui/carousel";
 import { LoginDialog } from "@/components/login";
-import { getMovies } from "@/api";
+import { getMovies, getSession, makePayment } from "@/api";
 
 // Cast Member Interface
 interface CastMember {
@@ -123,6 +123,8 @@ const reviewTags: ReviewTag[] = [
 ];
 
 const MovieDetailPage = () => {
+    const [session, setSession] = useState(null);;
+
   const navigate = useNavigate();
   const [isLoginOpen, setIsLoginOpen] = useState(false);
 
@@ -144,6 +146,8 @@ const MovieDetailPage = () => {
   useEffect(() => {
     const fetchMovie = async () => {
       try {
+        const data = await getSession();
+        setSession(data);
         const response = await getMovies()
         // const movieResp = response.data.find((mov: any) => mov.id === id);
         console.log(id);
@@ -188,14 +192,20 @@ const MovieDetailPage = () => {
             <div className="flex items-center space-x-4">
               <div className="flex items-center">
                 <span className="mr-2">Kochi</span>
-                <ChevronRight className="h-4 w-4" />
+                <ChevronDown className="h-4 w-4" />
               </div>
-              <Button 
-                className="bg-red-500 hover:bg-red-600"
-                onClick={() => setIsLoginOpen(true)}
-              >
-                Sign in
-              </Button>
+              {session ? (
+                <div className="flex items-center gap-2">
+                  <img 
+                    src={session.user?.user_metadata?.avatar_url} 
+                    alt="Profile" 
+                    className="w-8 h-8 rounded-full"
+                  />
+                  <span>{session.user?.user_metadata?.full_name}</span>
+                </div>
+              ) : (
+                <div className="flex items-center gap-2" />
+              )}
             </div>
           </div>
         </div>
@@ -274,7 +284,7 @@ const MovieDetailPage = () => {
                     <ChevronRight className="h-5 w-5 text-gray-400" />
                   </div>
                 </div>
-                <Button className="ml-4 bg-white text-black hover:bg-gray-200">
+                <Button onClick={payNow} className="ml-4 bg-white text-black hover:bg-gray-200">
                   Rate now
                 </Button>
               </div>
