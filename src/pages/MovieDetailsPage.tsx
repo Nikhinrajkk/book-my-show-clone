@@ -284,7 +284,7 @@ const MovieDetailPage = () => {
                     <ChevronRight className="h-5 w-5 text-gray-400" />
                   </div>
                 </div>
-                <Button onClick={payNow} className="ml-4 bg-white text-black hover:bg-gray-200">
+                <Button className="ml-4 bg-white text-black hover:bg-gray-200">
                   Rate now
                 </Button>
               </div>
