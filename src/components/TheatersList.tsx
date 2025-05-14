@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Heart, Info } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
@@ -134,23 +133,23 @@ const ShowTimeWithTooltip: React.FC<{ show: ShowTime }> = ({ show }) => {
         <div className="bg-white">
           <div className="grid grid-cols-4 text-center">
             <div className="p-3 flex flex-col">
-              <span className="font-bold">₹ 700.00</span>
-              <span className="text-xs font-medium">RECLINER</span>
+              <span className="text-base">₹ 700.00</span>
+              <span className="text-xs">RECLINER</span>
               <span className="text-xs text-amber-500">Almost Full</span>
             </div>
             <div className="p-3 flex flex-col">
-              <span className="font-bold">₹ 330.00</span>
-              <span className="text-xs font-medium">ELITE</span>
+              <span className="text-base">₹ 330.00</span>
+              <span className="text-xs">ELITE</span>
               <span className="text-xs text-amber-500">Almost Full</span>
             </div>
             <div className="p-3 flex flex-col">
-              <span className="font-bold">₹ 280.00</span>
-              <span className="text-xs font-medium">PRIME</span>
+              <span className="text-base">₹ 280.00</span>
+              <span className="text-xs">PRIME</span>
               <span className="text-xs text-bms-green">Available</span>
             </div>
             <div className="p-3 flex flex-col">
-              <span className="font-bold">₹ 210.00</span>
-              <span className="text-xs font-medium">CLASSIC</span>
+              <span className="text-base">₹ 210.00</span>
+              <span className="text-xs">CLASSIC</span>
               <span className="text-xs text-bms-green">Available</span>
             </div>
           </div>
