@@ -12,14 +12,14 @@ const ShowTimeBadge: React.FC<ShowTimeBadgeProps> = ({ time, format, isSelected,
   return (
     <div 
       onClick={onClick}
-      className={`rounded-md px-4 py-2 text-center min-w-[96px] h-[38px] flex flex-col justify-center cursor-pointer transition-colors ${
+      className={`rounded-md px-4 py-2 text-center min-w-[96px] h-[38px] flex flex-col justify-center items-centerflex gap-4 w-[90%] cursor-pointer transition-colors ${
         isSelected 
-          ? 'bg-amber-500 text-white' 
-          : 'bg-white text-amber-500 border border-amber-500'
+          ? 'bg-[#e8a900] text-white' 
+          : 'bg-white text-[#e8a900] border border-[#e8a900]'
       }`}
     >
-      <div className="text-base font-medium">{time}</div>
-      <div className="text-xs">{format}</div>
+      <div className="text-[10px]">{time}</div>
+      <div className="text-[10px]">{format}</div>
     </div>
   );
 };

@@ -39,7 +39,7 @@ const SeatLayout = () => {
         {/* Show time badges */}
         <div className="w-full bg-[#f5f5fa] flex justify-center border-b h-[58px]">
 
-        <div className="flex gap-4 w-[90%]">
+        <div className="flex gap-4 w-[90%] items-center">
           <ShowTimeBadge 
             time="06:45 PM" 
             format="4K LASER ATMOS" 
