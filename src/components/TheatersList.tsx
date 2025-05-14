@@ -27,7 +27,7 @@ interface TheaterListProps {
 
 const TheatersList: React.FC<TheaterListProps> = ({ theaters }) => {
   return (
-    <div className="container mx-auto px-4 pb-8">
+    <div className="container mx-auto px-4 pb-8 max-w-[80%]">
       <div className="mb-6 flex justify-between items-center">
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-1">
