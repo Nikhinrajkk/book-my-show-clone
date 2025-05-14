@@ -6,10 +6,12 @@ import { Button } from '@/components/ui/button';
 import ShowTimeBadge from '@/components/ShowTimeBadge';
 import SeatSelectionGrid from '@/components/SeatSelectionGrid';
 import SeatLegend from '@/components/SeatLegend';
+import SeatQuantityDialog from '@/components/SeatQuantityDialog';
 
 const SeatLayout = () => {
   const [selectedTime, setSelectedTime] = useState("06:45 PM");
-  
+  const [showSeatDialog, setShowSeatDialog] = useState(false);
+
   const handleTimeSelection = (time: string) => {
     setSelectedTime(time);
   };
@@ -79,6 +81,11 @@ const SeatLayout = () => {
           <Button className="w-full bg-red-500 hover:bg-red-600">Proceed</Button>
         </div>
       </div>
+
+      <SeatQuantityDialog 
+        isOpen={true}
+        onClose={() => setShowSeatDialog(false)}
+      />
     </div>
   );
 };

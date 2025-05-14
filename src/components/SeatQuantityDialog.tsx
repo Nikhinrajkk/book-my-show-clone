@@ -1,14 +1,5 @@
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AspectRatio } from '@/components/ui/aspect-ratio';
-import { Button } from '@/components/ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
 
 interface SeatQuantityDialogProps {
   isOpen: boolean;
@@ -24,22 +15,26 @@ const SeatQuantityDialog: React.FC<SeatQuantityDialogProps> = ({ isOpen, onClose
   const handleSelectSeats = () => {
     navigate('/seat-layout');
   };
+
+  if (!isOpen) return null;
   
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle className="text-center text-lg font-medium">How Many Seats?</DialogTitle>
-        </DialogHeader>
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      <div className="fixed inset-0 bg-black/80" onClick={onClose} />
+      <div className="relative bg-white rounded-lg w-full max-w-[515px] mx-4 p-6">
+        <div className="text-center mb-6">
+          <h2 className="text-lg font-semibold">How Many Seats?</h2>
+        </div>
+        
         <div className="flex flex-col items-center space-y-6 py-4">
           <div className="w-32">
-            <AspectRatio ratio={1}>
+            <div className="relative w-full" style={{ paddingBottom: '100%' }}>
               <img 
                 src="/lovable-uploads/482e12c9-5d21-4e1e-9444-94066ae3367d.png" 
                 alt="Scooter" 
-                className="w-full h-full object-contain"
+                className="absolute inset-0 w-full h-full object-contain"
               />
-            </AspectRatio>
+            </div>
           </div>
           
           <div className="flex flex-wrap justify-center gap-3">
@@ -47,10 +42,10 @@ const SeatQuantityDialog: React.FC<SeatQuantityDialogProps> = ({ isOpen, onClose
               <button
                 key={qty}
                 onClick={() => setSelectedQuantity(qty)}
-                className={`w-10 h-10 rounded-full flex items-center justify-center text-sm
+                className={`w-[30px] h-[30px] rounded-full flex items-center justify-center text-sm transition-colors
                   ${selectedQuantity === qty 
                     ? 'bg-red-500 text-white' 
-                    : 'bg-white text-gray-700 border border-gray-300'}`}
+                    : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'}`}
               >
                 {qty}
               </button>
@@ -70,15 +65,15 @@ const SeatQuantityDialog: React.FC<SeatQuantityDialogProps> = ({ isOpen, onClose
             </div>
           </div>
           
-          <Button 
+          <button 
             onClick={handleSelectSeats}
-            className="w-full bg-red-500 hover:bg-red-600 text-white"
+            className="w-full py-2 px-4 bg-red-500 hover:bg-red-600 text-white rounded-md transition-colors"
           >
             Select Seats
-          </Button>
+          </button>
         </div>
-      </DialogContent>
-    </Dialog>
+      </div>
+    </div>
   );
 };
 
