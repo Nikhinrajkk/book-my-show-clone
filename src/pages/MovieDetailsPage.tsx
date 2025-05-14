@@ -6,7 +6,12 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card } from "@/components/ui/card";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext } from "@/components/ui/carousel";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+} from "@/components/ui/carousel";
 import { LoginDialog } from "@/components/login";
 import { getMovies, getSession, makePayment } from "@/api";
 
@@ -39,38 +44,38 @@ const castMembers: CastMember[] = [
     id: 1,
     name: "Mohanlal",
     role: "as Shanmughan",
-    imageUrl: "https://images.unsplash.com/photo-1506744038136-46273834b3fb"
+    imageUrl: "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
   },
   {
     id: 2,
     name: "Shobana",
     role: "as Lalitha Shanmughan",
-    imageUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475"
+    imageUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475",
   },
   {
     id: 3,
     name: "Maniyanpilla Raju",
     role: "as Kuttichan",
-    imageUrl: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6"
+    imageUrl: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6",
   },
   {
     id: 4,
     name: "Irshad Ali",
     role: "as Shaji",
-    imageUrl: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5"
+    imageUrl: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5",
   },
   {
     id: 5,
     name: "Binu Pappu",
     role: "as SI Benny",
-    imageUrl: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7"
+    imageUrl: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7",
   },
   {
     id: 6,
     name: "Farhan Fazil",
     role: "as CPO Sudheesh",
-    imageUrl: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b"
-  }
+    imageUrl: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
+  },
 ];
 
 // Mock Data for Crew
@@ -79,38 +84,38 @@ const crewMembers: CrewMember[] = [
     id: 1,
     name: "Tharun Moorthy",
     role: "Director, Screenplay",
-    imageUrl: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81"
+    imageUrl: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81",
   },
   {
     id: 2,
     name: "M.Renjith",
     role: "Producer",
-    imageUrl: "https://images.unsplash.com/photo-1500673922987-e212871fec22"
+    imageUrl: "https://images.unsplash.com/photo-1500673922987-e212871fec22",
   },
   {
     id: 3,
     name: "Jakes Bejoy",
     role: "Musician",
-    imageUrl: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81"
+    imageUrl: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81",
   },
   {
     id: 4,
     name: "Avantika Renjith",
     role: "Executive Producer",
-    imageUrl: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81"
+    imageUrl: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81",
   },
   {
     id: 5,
     name: "K.R.Sunil",
     role: "Screenplay",
-    imageUrl: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81"
+    imageUrl: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81",
   },
   {
     id: 6,
     name: "Shaji Kumar",
     role: "Cinematographer",
-    imageUrl: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81"
-  }
+    imageUrl: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81",
+  },
 ];
 
 // Review Tags
@@ -119,11 +124,11 @@ const reviewTags: ReviewTag[] = [
   { id: 2, tag: "#SuperDirection", count: 51151 },
   { id: 3, tag: "#Wellmade", count: 38772 },
   { id: 4, tag: "#Blockbuster", count: 35570 },
-  { id: 5, tag: "#Amazing", count: 30000 }
+  { id: 5, tag: "#Amazing", count: 30000 },
 ];
 
 const MovieDetailPage = () => {
-    const [session, setSession] = useState(null);;
+  const [session, setSession] = useState(null);
 
   const navigate = useNavigate();
   const [isLoginOpen, setIsLoginOpen] = useState(false);
@@ -148,14 +153,14 @@ const MovieDetailPage = () => {
       try {
         const data = await getSession();
         setSession(data);
-        const response = await getMovies()
+        const response = await getMovies();
         // const movieResp = response.data.find((mov: any) => mov.id === id);
         console.log(id);
         console.log(response);
         const movieResp = response[1];
         setMovie(movieResp);
       } catch (error) {
-        console.error('Error fetching movie:', error);
+        console.error("Error fetching movie:", error);
       }
     };
     fetchMovie();
@@ -168,7 +173,7 @@ const MovieDetailPage = () => {
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
       <LoginDialog open={isLoginOpen} onOpenChange={setIsLoginOpen} />
-      
+
       {/* Header */}
       <header className="bg-white shadow-sm sticky top-0 z-10">
         <div className="container mx-auto px-4">
@@ -180,7 +185,7 @@ const MovieDetailPage = () => {
                 <span className="text-black">show</span>
               </Link>
             </div>
-            
+
             <div className="relative flex-grow max-w-xl mx-6">
               <input
                 type="search"
@@ -188,7 +193,7 @@ const MovieDetailPage = () => {
                 className="w-full px-4 py-2 rounded-md border border-gray-300"
               />
             </div>
-            
+
             <div className="flex items-center space-x-4">
               <div className="flex items-center">
                 <span className="mr-2">Kochi</span>
@@ -196,9 +201,9 @@ const MovieDetailPage = () => {
               </div>
               {session ? (
                 <div className="flex items-center gap-2">
-                  <img 
-                    src={session.user?.user_metadata?.avatar_url} 
-                    alt="Profile" 
+                  <img
+                    src={session.user?.user_metadata?.avatar_url}
+                    alt="Profile"
                     className="w-8 h-8 rounded-full"
                   />
                   <span>{session.user?.user_metadata?.full_name}</span>
@@ -209,7 +214,7 @@ const MovieDetailPage = () => {
             </div>
           </div>
         </div>
-        
+
         {/* Navigation */}
         <nav className="border-t border-gray-200">
           <div className="container mx-auto px-4">
@@ -228,40 +233,42 @@ const MovieDetailPage = () => {
           </div>
         </nav>
       </header>
-      
+
       {/* Hero Section - Enhanced to match the image exactly */}
       <section className="relative bg-[#121212]">
         {/* Background image overlay with proper gradient */}
-        <div 
+        <div
           className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/70 to-transparent z-0"
           style={{
             backgroundImage: `url('https://assets-in.bmscdn.com/iedb/movies/images/mobile/listing/xxlarge/thudarum-et00442565-1745136818.jpg')`,
-            backgroundSize: 'cover',
+            backgroundSize: "cover",
             opacity: 0.4,
-            backgroundPosition: 'center'
+            backgroundPosition: "center",
           }}
         ></div>
-        
+
         <div className="container mx-auto relative z-0 py-8">
           <div className="flex flex-col md:flex-row">
             {/* Movie Poster Card */}
             <div className="w-full md:w-[261px] flex-shrink-0 mb-6 md:mb-0 h-[392px]">
               <div className="relative rounded-lg overflow-hidden shadow-lg w-[] h-[392px]">
-                <img 
-                  src="https://jdswukniiyawdpfkpvjn.supabase.co/storage/v1/object/public/vibe-bucket/movies/thudarum.png" 
-                  alt="Thudarum" 
+                <img
+                  src="https://jdswukniiyawdpfkpvjn.supabase.co/storage/v1/object/public/vibe-bucket/movies/thudarum.png"
+                  alt="Thudarum"
                   className="w-[261px] h-[392px] object-cover"
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-black/70 text-center py-2">
                   <p className="text-white text-sm">In cinemas</p>
                 </div>
                 <button className="absolute top-4 left-4 bg-black/70 text-white text-sm rounded-md px-2 py-1 flex items-center">
-                  <span className="mr-1 flex items-center justify-center bg-white/20 rounded-full w-5 h-5">▶</span>
+                  <span className="mr-1 flex items-center justify-center bg-white/20 rounded-full w-5 h-5">
+                    ▶
+                  </span>
                   Trailers (4)
                 </button>
               </div>
             </div>
-            
+
             {/* Movie Details */}
             <div className="md:pl-8 flex-grow text-white">
               <div className="flex items-center justify-between mb-4">
@@ -271,7 +278,7 @@ const MovieDetailPage = () => {
                   Share
                 </Button>
               </div>
-              
+
               {/* Rating */}
               <div className="flex items-center mb-6">
                 <div className="flex items-center bg-[#2d2d2d] rounded-md pr-4">
@@ -280,7 +287,9 @@ const MovieDetailPage = () => {
                     <span className="ml-1 text-xl font-bold">9.3/10</span>
                   </div>
                   <div className="flex items-center">
-                    <span className="text-sm text-gray-400">({movie?.upvotes} Votes)</span>
+                    <span className="text-sm text-gray-400">
+                      ({movie?.upvotes} Votes)
+                    </span>
                     <ChevronRight className="h-5 w-5 text-gray-400" />
                   </div>
                 </div>
@@ -288,46 +297,57 @@ const MovieDetailPage = () => {
                   Rate now
                 </Button>
               </div>
-              
+
               {/* Movie Format & Languages */}
               <div className="flex flex-wrap gap-2 mb-6">
-                <Badge variant="outline" className="text-white border-gray-600 bg-transparent px-3 py-1 rounded-md">
+                <Badge
+                  variant="outline"
+                  className="text-white border-gray-600 bg-transparent px-3 py-1 rounded-md"
+                >
                   2D
                 </Badge>
-                <Badge variant="outline" className="text-white border-gray-600 bg-transparent px-3 py-1 rounded-md">
+                <Badge
+                  variant="outline"
+                  className="text-white border-gray-600 bg-transparent px-3 py-1 rounded-md"
+                >
                   Malayalam, Telugu
                 </Badge>
               </div>
-              
+
               {/* Movie Meta Information */}
               <div className="text-gray-400 mb-8">
                 <span>{movie?.runtime}</span>
                 <span className="mx-2">•</span>
                 <span>{movie?.genre}</span>
                 <span className="mx-2">•</span>
-                <span>U/A 16+</span>  
+                <span>U/A 16+</span>
                 <span className="mx-2">•</span>
                 <span>{movie?.release_date}</span>
               </div>
-              
+
               {/* Book Tickets Button */}
-              <Button className="bg-[#F84464] hover:bg-[#F84464]/90 text-white px-10 py-6 text-lg rounded-md" onClick={() => navigate('/select-theater')}>
+              <Button
+                className="bg-[#F84464] hover:bg-[#F84464]/90 text-white px-10 py-6 text-lg rounded-md"
+                onClick={() => {
+                  localStorage.setItem("selectedMovie", JSON.stringify(movie));
+
+                  navigate("/select-theater");
+                }}
+              >
                 Book tickets
               </Button>
             </div>
           </div>
         </div>
       </section>
-      
+
       {/* Movie Description */}
       <div className="container mx-auto px-4 py-8">
         <h2 className="text-2xl font-bold mb-4">About the movie</h2>
-        <p className="text-gray-700 mb-6">
-        {movie?.description}
-        </p>
-        
+        <p className="text-gray-700 mb-6">{movie?.description}</p>
+
         <div className="border-b border-gray-200 my-8"></div>
-        
+
         {/* Cast Section */}
         <h2 className="text-2xl font-bold mb-6">Cast</h2>
         <Carousel className="mb-8">
@@ -340,9 +360,9 @@ const MovieDetailPage = () => {
           </CarouselContent>
           <CarouselNext className="right-0" />
         </Carousel>
-        
+
         <div className="border-b border-gray-200 my-8"></div>
-        
+
         {/* Crew Section */}
         <h2 className="text-2xl font-bold mb-6">Crew</h2>
         <Carousel className="mb-8">
@@ -355,9 +375,9 @@ const MovieDetailPage = () => {
           </CarouselContent>
           <CarouselNext className="right-0" />
         </Carousel>
-        
+
         <div className="border-b border-gray-200 my-8"></div>
-        
+
         {/* Reviews Section */}
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold">Top reviews</h2>
@@ -365,9 +385,9 @@ const MovieDetailPage = () => {
             71.4K reviews <ChevronRight className="h-4 w-4" />
           </Link>
         </div>
-        
+
         <p className="text-gray-600 mb-6">Summary of 71.4K reviews.</p>
-        
+
         <ScrollArea className="whitespace-nowrap mb-8">
           <div className="flex space-x-3">
             {reviewTags.map((tag) => (
@@ -381,11 +401,19 @@ const MovieDetailPage = () => {
 };
 
 // Navigation Item component
-const NavItem = ({ label, active = false }: { label: string; active?: boolean }) => (
+const NavItem = ({
+  label,
+  active = false,
+}: {
+  label: string;
+  active?: boolean;
+}) => (
   <a
     href="#"
     className={`py-3 px-1 text-sm font-medium ${
-      active ? "text-red-500 border-b-2 border-red-500" : "text-gray-700 hover:text-red-500"
+      active
+        ? "text-red-500 border-b-2 border-red-500"
+        : "text-gray-700 hover:text-red-500"
     }`}
   >
     {label}
@@ -420,7 +448,9 @@ const CrewCard = ({ member }: { member: CrewMember }) => (
 const ReviewTag = ({ tag, count }: { tag: string; count: number }) => (
   <div className="flex items-center border border-gray-300 rounded-3xl px-4 py-1">
     <span className="text-red-500 font-medium">{tag}</span>
-    <span className="ml-2 bg-gray-200 text-gray-700 px-2 py-0.5 text-sm rounded">{count}</span>
+    <span className="ml-2 bg-gray-200 text-gray-700 px-2 py-0.5 text-sm rounded">
+      {count}
+    </span>
   </div>
 );
 

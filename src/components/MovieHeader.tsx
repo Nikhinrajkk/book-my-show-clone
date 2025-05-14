@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 interface MovieHeaderProps {
   title: string;
   certification: string;
-  genres: string[];
+  genres: string;
 }
 
 const MovieHeader: React.FC<MovieHeaderProps> = ({ 
@@ -21,7 +21,7 @@ const MovieHeader: React.FC<MovieHeaderProps> = ({
           <Badge variant="outline" className="rounded-full border border-gray-300 bg-white text-gray-700">
             {certification}
           </Badge>
-          {genres.map((genre, index) => (
+          {genres?.split(',').map((genre, index) => (
             <Badge 
               key={index}
               variant="outline" 

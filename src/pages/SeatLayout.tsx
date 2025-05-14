@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ArrowLeft, X } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import ShowTimeBadge from "@/components/ShowTimeBadge";
 import SeatSelectionGrid from "@/components/SeatSelectionGrid";
@@ -17,6 +17,7 @@ interface SeatData {
 }
 
 const SeatLayout = () => {
+  const navigate = useNavigate();
   const [selectedTime, setSelectedTime] = useState("06:45 PM");
   const [showSeatDialog, setShowSeatDialog] = useState(true);
   const [selectedQuantity, setSelectedQuantity] = React.useState<number>(2);
@@ -106,7 +107,10 @@ const SeatLayout = () => {
       {selectedQuantity === selectedSeats.length && (
         <div className="sticky bottom-0 bg-white border-t border-gray-200 p-4 flex justify-center">
           <div className="max-w-3xl mx-auto">
-            <Button className="w-[400px] h-[40px] bg-[#f84464] hover:bg-red-600">
+            <Button className="w-[400px] h-[40px] bg-[#f84464] hover:bg-red-600" onClick={() => {
+              localStorage.setItem("selectedSeats", JSON.stringify(selectedSeats));
+              navigate("/order/1");
+            }}>
               Proceed
             </Button>
           </div>

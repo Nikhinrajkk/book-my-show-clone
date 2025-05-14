@@ -7,6 +7,8 @@ import Footer from '@/components/Footer';
 import Legend from '@/components/Legend';
 
 const Index = () => {
+
+  const selectedMovie = JSON.parse(localStorage.getItem('selectedMovie') || '{}');
   // Mock data for theaters
   const theaters = [
     {
@@ -75,9 +77,9 @@ const Index = () => {
     <div className="min-h-screen bg-[#F5F5F5]">
       <Navbar />
       <MovieHeader 
-        title="Mission: Impossible - The Final Reckoning - (English)" 
+        title={selectedMovie.title} 
         certification="UA13+" 
-        genres={["Action", "Adventure", "Thriller"]} 
+        genres={selectedMovie.genre} 
       />
       <DateSelector />
       <Legend />

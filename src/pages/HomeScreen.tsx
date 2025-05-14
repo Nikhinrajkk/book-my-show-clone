@@ -200,7 +200,7 @@ const MovieHomePage = () => {
       {/* Main Content */}
       <main className="flex-grow container mx-auto max-w-[1240px] w-[92%] py-4">
         {/* Main Carousel */}
-        <div className="relative mb-8">
+        <div className="relative mb-8 w-[60%]">
           <Carousel className="w-full mx-auto">
             <CarouselContent>
               <CarouselItem>
