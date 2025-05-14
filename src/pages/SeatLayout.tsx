@@ -37,20 +37,23 @@ const SeatLayout = () => {
 
       <div className="w-full flex flex-col items-center">
         {/* Show time badges */}
-        <div className="flex gap-4 mb-8 w-full max-w-3xl">
+        <div className="w-full bg-[#f5f5fa] flex justify-center border-b h-[58px]">
+
+        <div className="flex gap-4 w-[90%]">
           <ShowTimeBadge 
             time="06:45 PM" 
             format="4K LASER ATMOS" 
             isSelected={selectedTime === "06:45 PM"} 
             onClick={() => handleTimeSelection("06:45 PM")}
-          />
+            />
           <ShowTimeBadge 
             time="10:00 PM" 
             format="4K LASER ATMOS" 
             isSelected={selectedTime === "10:00 PM"} 
             onClick={() => handleTimeSelection("10:00 PM")}
-          />
+            />
         </div>
+            </div>
 
         {/* Main content */}
         <div className="w-full space-y-4 mb-8 bg-[#fafafa]">
