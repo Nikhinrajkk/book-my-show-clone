@@ -201,10 +201,28 @@ const MovieHomePage = () => {
       <main className="flex-grow container mx-auto px-4 py-4">
         {/* Main Carousel */}
         <div className="relative mb-8">
-          <Carousel>
+          <Carousel className="w-[85%] mx-auto">
             <CarouselContent>
               <CarouselItem>
-                <div className="h-96 bg-black relative rounded-lg overflow-hidden">
+                <div className="h-[297px] bg-black relative rounded-lg overflow-hidden">
+                  <div className="absolute inset-0 flex items-center">
+                    <img 
+                      src="https://images.unsplash.com/photo-1506744038136-46273834b3fb" 
+                      alt="Carousel" 
+                      className="w-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent flex items-center pl-16">
+                      <div className="text-white">
+                        <h2 className="text-5xl font-bold mb-2">Unlock ₹500 off*</h2>
+                        <h3 className="text-4xl font-bold mb-6">on LIVE gigs</h3>
+                        <Button className="bg-red-500 hover:bg-red-600 px-8 py-6 text-lg">Apply Now</Button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </CarouselItem>
+              <CarouselItem>
+                <div className="h-[297px] bg-black relative rounded-lg overflow-hidden">
                   <div className="absolute inset-0 flex items-center">
                     <img 
                       src="https://images.unsplash.com/photo-1506744038136-46273834b3fb" 
